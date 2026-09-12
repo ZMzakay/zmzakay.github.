@@ -15,14 +15,21 @@
 
         body {
             margin: 0;
-            padding: 20px;
+            padding: 20px 10px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            /* Background configuration to cover entire screen and scale */
             background-image: var(--cardboard-bg);
             background-size: cover;
-            background-repeat: repeat;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
             color: var(--text-color);
             display: flex;
             justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
         .container {
@@ -219,7 +226,7 @@
             <!-- Social Links / Quick Links -->
             <div class="links-grid">
                 <a href="https://github.com/zmzakay" target="_blank" class="link-btn">GitHub <span>↗</span></a>
-                <a href="#" class="link-btn" id="portfolio-link">Portfolio <span>↗</span></a>
+                <a href="https://zmzakay.github.io" target="_blank" class="link-btn">Portfolio <span>↗</span></a>
             </div>
         </div>
 
@@ -252,7 +259,7 @@
                 
                 const repos = await response.json();
                 
-                // Update profile info if available
+                // Update profile info counters/handles
                 document.getElementById('profile-handle').textContent = `@${username}`;
                 document.getElementById('repo-count').textContent = repos.length;
 
@@ -266,10 +273,13 @@
                     return;
                 }
 
+                // Helper to generate github pages url: https://zmzakay.github.io/(repo-name)/
+                const getPagesUrl = (repoName) => `https://${username}.github.io/${repoName}/`;
+
                 // 1. Latest Project (First element from sorted array) uses 'Capture d’écran 2026-08-20 à 18.06.56.png'
                 const latestRepo = repos[0];
                 latestContentEl.innerHTML = `
-                    <a href="${latestRepo.html_url}" target="_blank" class="project-card" style="margin-bottom: 0; background: #fff;">
+                    <a href="${getPagesUrl(latestRepo.name)}" target="_blank" class="project-card" style="margin-bottom: 0; background: #fff;">
                         <div class="project-left">
                             <img src="Capture d’écran 2026-08-20 à 18.06.56.png" alt="Latest" class="project-icon">
                             <div class="project-details">
@@ -281,10 +291,10 @@
                     </a>
                 `;
 
-                // 2. All Projects list use 'IMG_1379.jpeg'
+                // 2. All Projects list use 'IMG_1379.jpeg' and link to github.io pages
                 repos.forEach(repo => {
                     const card = document.createElement('a');
-                    card.href = repo.html_url;
+                    card.href = getPagesUrl(repo.name);
                     card.target = "_blank";
                     card.className = "project-card";
                     
