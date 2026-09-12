@@ -29,7 +29,6 @@
             justify-content: center;
             box-sizing: border-box;
             min-height: 100vh;
-            /* Background texture applied seamlessly across full scrolling height */
             background-image: var(--cardboard-bg);
             background-size: cover;
             background-position: center;
@@ -390,8 +389,8 @@
                     </a>
                 `;
 
-                // Alternating icons array for GitHub projects list
-                const icons = [
+                // Fallback alternating icons array for other GitHub projects
+                const fallbackIcons = [
                     "IMG_1379.jpeg",
                     "copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg",
                     "IMG_1447.jpeg"
@@ -403,8 +402,18 @@
                     card.target = "_blank";
                     card.className = "project-card";
                     
-                    // Cycle through the 3 icons sequentially
-                    const currentIcon = icons[index % icons.length];
+                    let currentIcon;
+                    const repoNameLower = repo.name.toLowerCase();
+
+                    // Specific project image matching rules
+                    if (repoNameLower === "jailbreak") {
+                        currentIcon = "copy_59ABDB2B-C189-4B5C-8D35-733974CDDB1D.jpeg";
+                    } else if (repoNameLower === "respring") {
+                        currentIcon = "IMG_1456.jpeg";
+                    } else {
+                        // Cycle through fallback icons sequentially for remaining items
+                        currentIcon = fallbackIcons[index % fallbackIcons.length];
+                    }
                     
                     card.innerHTML = `
                         <div class="project-left">
