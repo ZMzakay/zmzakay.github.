@@ -13,23 +13,26 @@
             --accent-color: #8c5830;
         }
 
-        /* Seamless repeating background layer to cover top to bottom perfectly on iPhone */
+        /* Match the solid cardboard background color to eliminate any visual mismatch */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #c8a276; 
+            min-height: 100%;
+        }
+
+        /* Texture layer that fills the viewport cleanly */
         .bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background-image: var(--cardboard-bg);
-            background-repeat: repeat;
-            background-size: auto;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             z-index: -1;
-        }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            min-height: 100%;
         }
 
         body {
@@ -212,6 +215,17 @@
             background-color: #faeed4;
             border: 2px solid #b85d4f;
         }
+
+        /* Footer credits / copyright */
+        .footer-credits {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-color);
+            opacity: 0.75;
+            margin-top: 5px;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -253,6 +267,12 @@
             <div id="projects-list">
                 <p style="font-size: 0.85rem; text-align: center; opacity: 0.7;">Loading repositories from GitHub...</p>
             </div>
+        </div>
+
+        <!-- Footer Credits & Copyright -->
+        <div class="footer-credits">
+            Inspired by nxtcoreee3 style.<br>
+            &copy; 2026 zmzakay. All rights reserved.
         </div>
 
     </div>
