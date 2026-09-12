@@ -123,17 +123,11 @@
             opacity: 0.6;
         }
 
-        /* Section Titles matching reference style */
-        .section-header {
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: var(--accent-color);
+        /* Links Section inside Top Box */
+        .links-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 8px;
         }
 
         /* Link Buttons */
@@ -162,6 +156,19 @@
             color: #fff;
             padding: 2px 5px;
             border-radius: 3px;
+        }
+
+        /* Section Titles matching reference style */
+        .section-header {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* Project Cards */
@@ -244,7 +251,7 @@
 
     <div class="container">
         
-        <!-- Top Box: Profile & GitHub Link -->
+        <!-- Top Box: Profile & Socials -->
         <div class="box">
             <div class="profile-top">
                 <div class="profile-left-group">
@@ -259,11 +266,21 @@
 
             <hr class="divider">
 
-            <!-- GitHub Profile Link Button -->
-            <a href="https://github.com/zmzakay" target="_blank" class="link-btn">
-                <span>GitHub Profile</span>
-                <span class="arrow-box">↗</span>
-            </a>
+            <!-- Profile & Social Links -->
+            <div class="links-container">
+                <a href="https://github.com/zmzakay" target="_blank" class="link-btn">
+                    <span>GitHub Profile</span>
+                    <span class="arrow-box">↗</span>
+                </a>
+                <a href="https://www.youtube.com/@ZMzakay" target="_blank" class="link-btn">
+                    <span>YouTube Channel</span>
+                    <span class="arrow-box">↗</span>
+                </a>
+                <a href="https://www.tiktok.com/@zmzakay" target="_blank" class="link-btn">
+                    <span>TikTok Profile</span>
+                    <span class="arrow-box">↗</span>
+                </a>
+            </div>
         </div>
 
         <!-- Latest Project Box -->
@@ -320,7 +337,7 @@
                     return;
                 }
 
-                // Function to handle custom URL rule for zmzakay.github.io
+                // Custom URL rule for zmzakay.github.io
                 const getPagesUrl = (repoName) => {
                     if (repoName.toLowerCase() === `${username.toLowerCase()}.github.io`) {
                         return `https://${username}.github.io`;
@@ -343,9 +360,12 @@
                     </a>
                 `;
 
-                // All Projects alternate icons between IMG_1379.jpeg and copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg
-                const icon1 = "IMG_1379.jpeg";
-                const icon2 = "copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg";
+                // Alternating icons array for GitHub projects list
+                const icons = [
+                    "IMG_1379.jpeg",
+                    "copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg",
+                    "IMG_1447.jpeg"
+                ];
 
                 repos.forEach((repo, index) => {
                     const card = document.createElement('a');
@@ -353,8 +373,8 @@
                     card.target = "_blank";
                     card.className = "project-card";
                     
-                    // Alternating icon logic based on index
-                    const currentIcon = (index % 2 === 0) ? icon1 : icon2;
+                    // Cycle through the 3 icons sequentially
+                    const currentIcon = icons[index % icons.length];
                     
                     card.innerHTML = `
                         <div class="project-left">
