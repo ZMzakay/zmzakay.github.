@@ -13,18 +13,25 @@
             --accent-color: #8c5830;
         }
 
-        body {
-            margin: 0;
-            padding: 20px 10px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            
-            /* Background configuration to cover entire screen and scale */
+        /* Fixed full-screen background layer to prevent scaling/gap issues on iPhone */
+        html::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             background-image: var(--cardboard-bg);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
-            
+            z-index: -1;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-color);
             display: flex;
             justify-content: center;
@@ -111,11 +118,10 @@
             align-items: center;
         }
 
-        /* Links Grid */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+        /* Single Link Layout (Portfolio removed) */
+        .link-container {
+            display: flex;
+            flex-direction: column;
         }
 
         .link-btn {
@@ -223,10 +229,9 @@
                 <div class="watermark-stamp">100% GitHub Made</div>
             </div>
 
-            <!-- Social Links / Quick Links -->
-            <div class="links-grid">
-                <a href="https://github.com/zmzakay" target="_blank" class="link-btn">GitHub <span>↗</span></a>
-                <a href="https://zmzakay.github.io" target="_blank" class="link-btn">Portfolio <span>↗</span></a>
+            <!-- GitHub Link (Portfolio removed) -->
+            <div class="link-container">
+                <a href="https://github.com/zmzakay" target="_blank" class="link-btn">GitHub Profile <span>↗</span></a>
             </div>
         </div>
 
@@ -259,7 +264,7 @@
                 
                 const repos = await response.json();
                 
-                // Update profile info counters/handles
+                // Update profile handle & repo count
                 document.getElementById('profile-handle').textContent = `@${username}`;
                 document.getElementById('repo-count').textContent = repos.length;
 
