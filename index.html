@@ -13,15 +13,15 @@
             --accent-color: #8c5830;
         }
 
-        /* Match the solid cardboard background color to eliminate any visual mismatch */
+        /* Set a slightly darker cardboard tone as the page foundation */
         html, body {
             margin: 0;
             padding: 0;
-            background-color: #c8a276; 
+            background-color: #bd9569; 
             min-height: 100%;
         }
 
-        /* Texture layer that fills the viewport cleanly */
+        /* Seamless repeating cardboard texture layer */
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -32,7 +32,8 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: -1;
+            pointer-events: none;
+            z-index: 0;
         }
 
         body {
@@ -42,6 +43,8 @@
             display: flex;
             justify-content: center;
             box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
 
         .container {
