@@ -14,36 +14,27 @@
             --stamp-color: #b85d4f;
         }
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            background-color: #bd9569; 
+        /* Seamless full-height background fix */
+        html {
+            background-color: #bd9569;
             min-height: 100%;
         }
 
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: var(--cardboard-bg);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            pointer-events: none;
-            z-index: 0;
-        }
-
         body {
-            padding: 16px 10px 30px 10px;
+            margin: 0;
+            padding: 20px 10px 50px 10px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-color);
             display: flex;
             justify-content: center;
             box-sizing: border-box;
-            position: relative;
-            z-index: 1;
+            min-height: 100vh;
+            /* Background texture applied seamlessly across full scrolling height */
+            background-image: var(--cardboard-bg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         .container {
@@ -171,6 +162,30 @@
             align-items: center;
         }
 
+        /* About Me Content */
+        .about-text {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: #fff;
+            border: 1px solid var(--box-border);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 7px;
+            border-radius: 4px;
+        }
+
         /* Project Cards */
         .project-card {
             background-color: #fff;
@@ -237,17 +252,16 @@
         /* Footer credits / copyright */
         .footer-credits {
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-color);
-            opacity: 0.7;
-            margin-top: 8px;
-            line-height: 1.3;
+            opacity: 0.75;
+            margin-top: 12px;
+            line-height: 1.4;
+            padding-bottom: 10px;
         }
     </style>
 </head>
 <body>
-
-    <div class="bg-pattern"></div>
 
     <div class="container">
         
@@ -280,6 +294,22 @@
                     <span>TikTok Profile</span>
                     <span class="arrow-box">↗</span>
                 </a>
+            </div>
+        </div>
+
+        <!-- About Me Box -->
+        <div class="box">
+            <div class="section-header">
+                <span>About Me</span>
+                <span>📌</span>
+            </div>
+            <p class="about-text">
+                Developer and content creator building open-source projects, tools, and web experiments. Passionate about coding, iOS, and sharing stuff with the community!
+            </p>
+            <div class="about-tags">
+                <span class="tag">💻 Developer</span>
+                <span class="tag">🎬 Creator</span>
+                <span class="tag">🚀 Open Source</span>
             </div>
         </div>
 
