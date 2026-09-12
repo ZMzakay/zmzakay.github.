@@ -322,12 +322,15 @@
 
                 const getPagesUrl = (repoName) => `https://${username}.github.io/${repoName}/`;
 
-                // Latest Project uses 'Capture d’écran 2026-08-20 à 18.06.56.png'
+                // URL-encoded path for the latest project image to prevent breaking on special characters/spaces
+                const latestImagePath = encodeURI("Capture d’écran 2026-08-20 à 18.06.56.png");
+
+                // Latest Project
                 const latestRepo = repos[0];
                 latestContentEl.innerHTML = `
                     <a href="${getPagesUrl(latestRepo.name)}" target="_blank" class="project-card" style="background: #fff;">
                         <div class="project-left">
-                            <img src="Capture d’écran 2026-08-20 à 18.06.56.png" alt="Latest" class="project-icon">
+                            <img src="${latestImagePath}" alt="Latest" class="project-icon" onerror="this.src='IMG_1379.jpeg'">
                             <div class="project-details">
                                 <h3>${latestRepo.name}</h3>
                                 <p>${latestRepo.description || "No description provided."}</p>
