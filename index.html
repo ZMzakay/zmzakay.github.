@@ -13,29 +13,31 @@
             --accent-color: #8c5830;
         }
 
-        /* Fixed full-screen background layer to prevent scaling/gap issues on iPhone */
-        html::before {
-            content: "";
+        /* Seamless repeating background layer to cover top to bottom perfectly on iPhone */
+        .bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background-image: var(--cardboard-bg);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-repeat: repeat;
+            background-size: auto;
             z-index: -1;
         }
 
-        body {
+        html, body {
             margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
             padding: 20px 10px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-color);
             display: flex;
             justify-content: center;
-            min-height: 100vh;
             box-sizing: border-box;
         }
 
@@ -118,7 +120,7 @@
             align-items: center;
         }
 
-        /* Single Link Layout (Portfolio removed) */
+        /* Single Link Layout */
         .link-container {
             display: flex;
             flex-direction: column;
@@ -214,6 +216,8 @@
 </head>
 <body>
 
+    <div class="bg-pattern"></div>
+
     <div class="container">
         
         <!-- Top Box: Profile & Socials -->
@@ -229,7 +233,7 @@
                 <div class="watermark-stamp">100% GitHub Made</div>
             </div>
 
-            <!-- GitHub Link (Portfolio removed) -->
+            <!-- GitHub Link -->
             <div class="link-container">
                 <a href="https://github.com/zmzakay" target="_blank" class="link-btn">GitHub Profile <span>↗</span></a>
             </div>
@@ -256,7 +260,6 @@
     <script>
         const username = "zmzakay";
         
-        // Fetch public repositories from GitHub API
         async function fetchGitHubData() {
             try {
                 const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
@@ -264,24 +267,22 @@
                 
                 const repos = await response.json();
                 
-                // Update profile handle & repo count
                 document.getElementById('profile-handle').textContent = `@${username}`;
                 document.getElementById('repo-count').textContent = repos.length;
 
                 const projectsListEl = document.getElementById('projects-list');
                 const latestContentEl = document.getElementById('latest-project-content');
                 
-                projectsListEl.innerHTML = ""; // Clear loader
+                projectsListEl.innerHTML = "";
 
                 if (repos.length === 0) {
                     projectsListEl.innerHTML = "<p style='font-size: 0.85rem; text-align: center;'>No public repositories found.</p>";
                     return;
                 }
 
-                // Helper to generate github pages url: https://zmzakay.github.io/(repo-name)/
                 const getPagesUrl = (repoName) => `https://${username}.github.io/${repoName}/`;
 
-                // 1. Latest Project (First element from sorted array) uses 'Capture d’écran 2026-08-20 à 18.06.56.png'
+                // Latest Project uses 'Capture d’écran 2026-08-20 à 18.06.56.png'
                 const latestRepo = repos[0];
                 latestContentEl.innerHTML = `
                     <a href="${getPagesUrl(latestRepo.name)}" target="_blank" class="project-card" style="margin-bottom: 0; background: #fff;">
@@ -296,7 +297,7 @@
                     </a>
                 `;
 
-                // 2. All Projects list use 'IMG_1379.jpeg' and link to github.io pages
+                // All Projects use 'IMG_1379.jpeg'
                 repos.forEach(repo => {
                     const card = document.createElement('a');
                     card.href = getPagesUrl(repo.name);
