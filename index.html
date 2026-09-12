@@ -244,6 +244,7 @@
 
     <div class="container">
         
+        <!-- Top Box: Profile & GitHub Link -->
         <div class="box">
             <div class="profile-top">
                 <div class="profile-left-group">
@@ -258,12 +259,14 @@
 
             <hr class="divider">
 
+            <!-- GitHub Profile Link Button -->
             <a href="https://github.com/zmzakay" target="_blank" class="link-btn">
                 <span>GitHub Profile</span>
                 <span class="arrow-box">↗</span>
             </a>
         </div>
 
+        <!-- Latest Project Box -->
         <div class="box latest-box">
             <div class="section-header">
                 <span>Latest Project</span>
@@ -274,6 +277,7 @@
             </div>
         </div>
 
+        <!-- All Projects Box (Fetched from GitHub) -->
         <div class="box">
             <div class="section-header">
                 <span>GitHub Projects</span>
@@ -284,6 +288,7 @@
             </div>
         </div>
 
+        <!-- Footer Credits & Copyright -->
         <div class="footer-credits">
             Inspired by nxtcoreee3 style.<br>
             &copy; 2026 zmzakay. All rights reserved.
@@ -315,7 +320,13 @@
                     return;
                 }
 
-                const getPagesUrl = (repoName) => `https://${username}.github.io/${repoName}/`;
+                // Function to handle custom URL rule for zmzakay.github.io
+                const getPagesUrl = (repoName) => {
+                    if (repoName.toLowerCase() === `${username.toLowerCase()}.github.io`) {
+                        return `https://${username}.github.io`;
+                    }
+                    return `https://${username}.github.io/${repoName}/`;
+                };
 
                 // Latest Project uses 'IMG_1217.gif'
                 const latestRepo = repos[0];
@@ -332,16 +343,22 @@
                     </a>
                 `;
 
-                // All Projects use 'copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg'
-                repos.forEach(repo => {
+                // All Projects alternate icons between IMG_1379.jpeg and copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg
+                const icon1 = "IMG_1379.jpeg";
+                const icon2 = "copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg";
+
+                repos.forEach((repo, index) => {
                     const card = document.createElement('a');
                     card.href = getPagesUrl(repo.name);
                     card.target = "_blank";
                     card.className = "project-card";
                     
+                    // Alternating icon logic based on index
+                    const currentIcon = (index % 2 === 0) ? icon1 : icon2;
+                    
                     card.innerHTML = `
                         <div class="project-left">
-                            <img src="copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg" alt="Project" class="project-icon">
+                            <img src="${currentIcon}" alt="Project" class="project-icon">
                             <div class="project-details">
                                 <h3>${repo.name}</h3>
                                 <p>${repo.description || "Open source GitHub project"}</p>
