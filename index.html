@@ -244,7 +244,6 @@
 
     <div class="container">
         
-        <!-- Top Box: Profile & GitHub Link -->
         <div class="box">
             <div class="profile-top">
                 <div class="profile-left-group">
@@ -259,14 +258,12 @@
 
             <hr class="divider">
 
-            <!-- GitHub Profile Link Button -->
             <a href="https://github.com/zmzakay" target="_blank" class="link-btn">
                 <span>GitHub Profile</span>
                 <span class="arrow-box">↗</span>
             </a>
         </div>
 
-        <!-- Latest Project Box -->
         <div class="box latest-box">
             <div class="section-header">
                 <span>Latest Project</span>
@@ -277,7 +274,6 @@
             </div>
         </div>
 
-        <!-- All Projects Box (Fetched from GitHub) -->
         <div class="box">
             <div class="section-header">
                 <span>GitHub Projects</span>
@@ -288,7 +284,6 @@
             </div>
         </div>
 
-        <!-- Footer Credits & Copyright -->
         <div class="footer-credits">
             Inspired by nxtcoreee3 style.<br>
             &copy; 2026 zmzakay. All rights reserved.
@@ -322,15 +317,12 @@
 
                 const getPagesUrl = (repoName) => `https://${username}.github.io/${repoName}/`;
 
-                // URL-encoded path for the latest project image to prevent breaking on special characters/spaces
-                const latestImagePath = encodeURI("Capture d’écran 2026-08-20 à 18.06.56.png");
-
-                // Latest Project
+                // Latest Project uses 'IMG_1217.gif'
                 const latestRepo = repos[0];
                 latestContentEl.innerHTML = `
                     <a href="${getPagesUrl(latestRepo.name)}" target="_blank" class="project-card" style="background: #fff;">
                         <div class="project-left">
-                            <img src="${latestImagePath}" alt="Latest" class="project-icon" onerror="this.src='IMG_1379.jpeg'">
+                            <img src="IMG_1217.gif" alt="Latest" class="project-icon">
                             <div class="project-details">
                                 <h3>${latestRepo.name}</h3>
                                 <p>${latestRepo.description || "No description provided."}</p>
@@ -340,7 +332,7 @@
                     </a>
                 `;
 
-                // All Projects use 'IMG_1379.jpeg'
+                // All Projects use 'copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg'
                 repos.forEach(repo => {
                     const card = document.createElement('a');
                     card.href = getPagesUrl(repo.name);
@@ -349,7 +341,7 @@
                     
                     card.innerHTML = `
                         <div class="project-left">
-                            <img src="IMG_1379.jpeg" alt="Project" class="project-icon">
+                            <img src="copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg" alt="Project" class="project-icon">
                             <div class="project-details">
                                 <h3>${repo.name}</h3>
                                 <p>${repo.description || "Open source GitHub project"}</p>
