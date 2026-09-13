@@ -68,11 +68,12 @@
             align-items: center;
         }
 
+        /* iOS App Squircle Style for Avatar */
         .avatar {
             width: 58px;
             height: 58px;
-            border-radius: 6px;
-            border: 2px solid var(--box-border);
+            border-radius: 22%;
+            border: 1.5px solid var(--box-border);
             object-fit: cover;
         }
 
@@ -214,10 +215,11 @@
             overflow: hidden;
         }
 
+        /* iOS App Squircle Style for Project Icons */
         .project-icon {
             width: 38px;
             height: 38px;
-            border-radius: 5px;
+            border-radius: 22%;
             border: 1px solid var(--box-border);
             object-fit: cover;
             flex-shrink: 0;
@@ -410,6 +412,8 @@
                         currentIcon = "copy_59ABDB2B-C189-4B5C-8D35-733974CDDB1D.jpeg";
                     } else if (repoNameLower === "respring") {
                         currentIcon = "IMG_1456.jpeg";
+                    } else if (repoNameLower === "icongenerator") {
+                        currentIcon = "images/IMG_1466.jpeg";
                     } else {
                         // Cycle through fallback icons sequentially for remaining items
                         currentIcon = fallbackIcons[index % fallbackIcons.length];
