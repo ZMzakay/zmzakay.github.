@@ -574,12 +574,20 @@
                 };
 
                 const latestRepo = repos[0];
+                let latestDisplayName = latestRepo.name;
+                let latestIconUrl = "IMG_1217.gif";
+                
+                if (latestRepo.name.toLowerCase() === `${username.toLowerCase()}.github.io`) {
+                    latestDisplayName = "main-page";
+                    latestIconUrl = "images/IMG_1467.jpeg";
+                }
+
                 latestContentEl.innerHTML = `
                     <a href="${getPagesUrl(latestRepo.name)}" target="_blank" class="project-card" style="background: #fff;">
                         <div class="project-left">
-                            <img src="IMG_1217.gif" alt="Latest" class="project-icon">
+                            <img src="${latestIconUrl}" alt="Latest" class="project-icon">
                             <div class="project-details">
-                                <h3>${latestRepo.name}</h3>
+                                <h3>${latestDisplayName}</h3>
                                 <p>${latestRepo.description || "No description provided."}</p>
                             </div>
                         </div>
@@ -600,9 +608,13 @@
                     card.className = "project-card";
                     
                     let currentIcon;
+                    let displayName = repo.name;
                     const repoNameLower = repo.name.toLowerCase();
 
-                    if (repoNameLower === "jailbreak") {
+                    if (repoNameLower === `${username.toLowerCase()}.github.io`) {
+                        displayName = "main-page";
+                        currentIcon = "images/IMG_1467.jpeg";
+                    } else if (repoNameLower === "jailbreak") {
                         currentIcon = "copy_59ABDB2B-C189-4B5C-8D35-733974CDDB1D.jpeg";
                     } else if (repoNameLower === "respring") {
                         currentIcon = "IMG_1456.jpeg";
@@ -616,7 +628,7 @@
                         <div class="project-left">
                             <img src="${currentIcon}" alt="Project" class="project-icon">
                             <div class="project-details">
-                                <h3>${repo.name}</h3>
+                                <h3>${displayName}</h3>
                                 <p>${repo.description || "Open source GitHub project"}</p>
                             </div>
                         </div>
