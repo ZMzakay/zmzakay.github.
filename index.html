@@ -221,6 +221,13 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: background 0.2s;
+        }
+
+        .stat-card:hover {
+            background-color: #faf5ed;
         }
 
         .stat-platform {
@@ -232,7 +239,7 @@
         }
 
         .stat-value {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 900;
             color: var(--text-color);
         }
@@ -382,21 +389,21 @@
 
             <hr class="divider">
 
-            <!-- Live Stats Widget Section -->
+            <!-- Live Stats Widget Section (Clickable to Channels) -->
             <div style="margin-bottom: 10px;">
                 <div class="section-header" style="margin-bottom: 6px;">
                     <span>Live Stats (@zmzakay)</span>
                     <span>📈</span>
                 </div>
                 <div class="stats-grid">
-                    <div class="stat-card">
+                    <a href="https://www.youtube.com/@ZMzakay" target="_blank" class="stat-card">
                         <span class="stat-platform">YouTube Subs</span>
-                        <span class="stat-value" id="yt-subs">Loading...</span>
-                    </div>
-                    <div class="stat-card">
+                        <span class="stat-value" id="yt-subs">Checking...</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@zmzakay" target="_blank" class="stat-card">
                         <span class="stat-platform">TikTok Followers</span>
-                        <span class="stat-value" id="tt-followers">Loading...</span>
-                    </div>
+                        <span class="stat-value" id="tt-followers">Checking...</span>
+                    </a>
                 </div>
             </div>
 
@@ -509,7 +516,6 @@
                     return;
                 }
 
-                // Custom URL rule for zmzakay.github.io
                 const getPagesUrl = (repoName) => {
                     if (repoName.toLowerCase() === `${username.toLowerCase()}.github.io`) {
                         return `https://${username}.github.io`;
@@ -517,7 +523,6 @@
                     return `https://${username}.github.io/${repoName}/`;
                 };
 
-                // Latest Project uses 'IMG_1217.gif'
                 const latestRepo = repos[0];
                 latestContentEl.innerHTML = `
                     <a href="${getPagesUrl(latestRepo.name)}" target="_blank" class="project-card" style="background: #fff;">
@@ -532,12 +537,13 @@
                     </a>
                 `;
 
-                // Fallback alternating icons array for other GitHub projects
                 const fallbackIcons = [
                     "IMG_1379.jpeg",
                     "copy_FB0C7104-326D-443C-8F5D-5A5DF1BB942A.jpeg",
                     "IMG_1447.jpeg"
                 ];
+
+                repos.repos?.forEach?.(() => {}); // safety helper
 
                 repos.forEach((repo, index) => {
                     const card = document.createElement('a');
@@ -548,7 +554,6 @@
                     let currentIcon;
                     const repoNameLower = repo.name.toLowerCase();
 
-                    // Specific project image matching rules
                     if (repoNameLower === "jailbreak") {
                         currentIcon = "copy_59ABDB2B-C189-4B5C-8D35-733974CDDB1D.jpeg";
                     } else if (repoNameLower === "respring") {
@@ -556,7 +561,6 @@
                     } else if (repoNameLower === "icongenerator") {
                         currentIcon = "images/IMG_1466.jpeg";
                     } else {
-                        // Cycle through fallback icons sequentially for remaining items
                         currentIcon = fallbackIcons[index % fallbackIcons.length];
                     }
                     
@@ -579,37 +583,40 @@
             }
         }
 
-        // Live stats fetcher simulation / API hooks
+        // Live stats fetcher loop with direct channel action fallbacks
         async function fetchLiveSocialStats() {
+            // YouTube Sub Counter Fetch attempt
             try {
-                // Fetching via a reliable open counter API provider widget route
-                const res = await fetch('https://api.socialcounts.org/youtube-live-subscriber-count/user/ZMzakay');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.counts && data.counts[0]) {
-                        document.getElementById('yt-subs').textContent = Number(data.counts[0].subscribers).toLocaleString();
+                const ytRes = await fetch('https://api.socialcounts.org/youtube-live-subscriber-count/user/ZMzakay');
+                if (ytRes.ok) {
+                    const ytData = await ytRes.json();
+                    if (ytData && ytData.counts && ytData.counts[0]) {
+                        document.getElementById('yt-subs').textContent = Number(ytData.counts[0].subscribers).toLocaleString();
                     } else {
-                        document.getElementById('yt-subs').textContent = "Active";
+                        throw new Error("Invalid format");
                     }
                 } else {
-                    document.getElementById('yt-subs').textContent = "View";
+                    throw new Error("API Limit");
                 }
             } catch (e) {
-                document.getElementById('yt-subs').textContent = "Check Channel";
+                // Graceful fallback button style: directs straight to channel if automated public fetch gets blocked by browser security
+                document.getElementById('yt-subs').textContent = "Open Channel ↗";
             }
 
+            // TikTok Counter Fetch attempt 
             try {
-                // TikTok stats placeholder badge hook
-                // Due to tight security on TikTok tracking APIs directly from static pages, 
-                // you can link your exact live counter view or keep it clean:
-                document.getElementById('tt-followers').textContent = "View Profile";
+                // TikTok blocks cross-origin browser direct fetches, so we set a smooth fallback link label:
+                document.getElementById('tt-followers').textContent = "Open Profile ↗";
             } catch (e) {
-                document.getElementById('tt-followers').textContent = "Active";
+                document.getElementById('tt-followers').textContent = "Open Profile ↗";
             }
         }
 
         fetchGitHubData();
+        
+        // Fetch stats immediately, then refresh every 60 seconds
         fetchLiveSocialStats();
+        setInterval(fetchLiveSocialStats, 60000);
     </script>
 </body>
 </html>
