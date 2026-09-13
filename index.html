@@ -45,7 +45,7 @@
             position: relative;
         }
 
-        /* Box / Card Styling (Clean look) */
+        /* Box / Card Styling */
         .box {
             background-color: var(--box-bg);
             border: 2px solid var(--box-border);
@@ -134,7 +134,6 @@
             font-weight: 500;
         }
 
-        /* Authentic Reference Stamp Box */
         .watermark-stamp {
             border: 1.5px solid var(--stamp-color);
             color: var(--stamp-color);
@@ -156,14 +155,13 @@
             opacity: 0.6;
         }
 
-        /* Links Section inside Top Box */
+        /* Links Section */
         .links-container {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        /* Link Buttons */
         .link-btn {
             background-color: #fff;
             border: 1.5px solid var(--box-border);
@@ -191,7 +189,6 @@
             border-radius: 3px;
         }
 
-        /* Section Titles matching reference style */
         .section-header {
             font-size: 0.75rem;
             font-weight: 800;
@@ -204,44 +201,76 @@
             align-items: center;
         }
 
-        /* Live Stats Grid */
-        .stats-grid {
+        /* NEW COOL WIDGET: Live Status & Interactive Stamp Container */
+        .widget-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
-            margin-top: 4px;
         }
 
-        .stat-card {
+        .widget-card {
             background-color: #fff;
             border: 1.5px solid var(--box-border);
             border-radius: 5px;
-            padding: 8px 10px;
+            padding: 10px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: background 0.2s;
+            align-items: center;
         }
 
-        .stat-card:hover {
-            background-color: #faf5ed;
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 3px;
         }
 
-        .stat-platform {
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            box-shadow: 0 0 0 rgba(46, 204, 113, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        .status-desc {
+            font-size: 0.7rem;
             opacity: 0.7;
-            margin-bottom: 2px;
+            margin: 0;
         }
 
-        .stat-value {
+        /* Interactive Stamp Clicker Button */
+        .stamp-clicker {
+            background: #faeed4;
+            border: 1.5px dashed var(--box-border);
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .stamp-clicker:active {
+            transform: scale(0.96);
+        }
+
+        .stamp-clicker:hover {
+            background: #f4d8a8;
+        }
+
+        .stamp-count-text {
             font-size: 0.95rem;
             font-weight: 900;
-            color: var(--text-color);
+            color: var(--stamp-color);
+            margin-top: 2px;
         }
 
         /* About Me Content */
@@ -297,7 +326,6 @@
             overflow: hidden;
         }
 
-        /* iOS App Squircle Style for Project Icons */
         .project-icon {
             width: 38px;
             height: 38px;
@@ -326,13 +354,11 @@
             overflow: hidden;
         }
 
-        /* Latest Project Highlight Box */
         .latest-box {
             background-color: #faeed4;
             border: 2px solid #b85d4f;
         }
 
-        /* Friends List Grid Style */
         .friends-grid {
             display: flex;
             flex-wrap: wrap;
@@ -356,7 +382,6 @@
             font-weight: 600;
         }
 
-        /* Footer credits / copyright */
         .footer-credits {
             text-align: center;
             font-size: 0.75rem;
@@ -389,21 +414,26 @@
 
             <hr class="divider">
 
-            <!-- Live Stats Widget Section (Clickable to Channels) -->
+            <!-- COOL REPLACEMENT WIDGETS: Live Status & Interactive Stamp -->
             <div style="margin-bottom: 10px;">
                 <div class="section-header" style="margin-bottom: 6px;">
-                    <span>Live Stats (@zmzakay)</span>
-                    <span>📈</span>
+                    <span>Developer Hub</span>
+                    <span>⚡</span>
                 </div>
-                <div class="stats-grid">
-                    <a href="https://www.youtube.com/@ZMzakay" target="_blank" class="stat-card">
-                        <span class="stat-platform">YouTube Subs</span>
-                        <span class="stat-value" id="yt-subs">Checking...</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@zmzakay" target="_blank" class="stat-card">
-                        <span class="stat-platform">TikTok Followers</span>
-                        <span class="stat-value" id="tt-followers">Checking...</span>
-                    </a>
+                <div class="widget-grid">
+                    <!-- Live Coding Status Card -->
+                    <div class="widget-card">
+                        <div class="status-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>Online</span>
+                        </div>
+                        <p class="status-desc">Coding Open Source</p>
+                    </div>
+                    <!-- Interactive Visitor Stamp Counter -->
+                    <div class="widget-card stamp-clicker" onclick="incrementStamps()" title="Click to stamp!">
+                        <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; opacity: 0.8;">Page Stamps 🏷️</span>
+                        <span class="stamp-count-text" id="stamp-counter">142</span>
+                    </div>
                 </div>
             </div>
 
@@ -543,8 +573,6 @@
                     "IMG_1447.jpeg"
                 ];
 
-                repos.repos?.forEach?.(() => {}); // safety helper
-
                 repos.forEach((repo, index) => {
                     const card = document.createElement('a');
                     card.href = getPagesUrl(repo.name);
@@ -583,40 +611,17 @@
             }
         }
 
-        // Live stats fetcher loop with direct channel action fallbacks
-        async function fetchLiveSocialStats() {
-            // YouTube Sub Counter Fetch attempt
-            try {
-                const ytRes = await fetch('https://api.socialcounts.org/youtube-live-subscriber-count/user/ZMzakay');
-                if (ytRes.ok) {
-                    const ytData = await ytRes.json();
-                    if (ytData && ytData.counts && ytData.counts[0]) {
-                        document.getElementById('yt-subs').textContent = Number(ytData.counts[0].subscribers).toLocaleString();
-                    } else {
-                        throw new Error("Invalid format");
-                    }
-                } else {
-                    throw new Error("API Limit");
-                }
-            } catch (e) {
-                // Graceful fallback button style: directs straight to channel if automated public fetch gets blocked by browser security
-                document.getElementById('yt-subs').textContent = "Open Channel ↗";
-            }
+        // Interactive Stamp Counter Logic stored locally in browser session
+        let stampCount = localStorage.getItem('zmzakay_stamps') ? parseInt(localStorage.getItem('zmzakay_stamps')) : 142;
+        document.getElementById('stamp-counter').textContent = stampCount;
 
-            // TikTok Counter Fetch attempt 
-            try {
-                // TikTok blocks cross-origin browser direct fetches, so we set a smooth fallback link label:
-                document.getElementById('tt-followers').textContent = "Open Profile ↗";
-            } catch (e) {
-                document.getElementById('tt-followers').textContent = "Open Profile ↗";
-            }
+        function incrementStamps() {
+            stampCount++;
+            document.getElementById('stamp-counter').textContent = stampCount;
+            localStorage.setItem('zmzakay_stamps', stampCount);
         }
 
         fetchGitHubData();
-        
-        // Fetch stats immediately, then refresh every 60 seconds
-        fetchLiveSocialStats();
-        setInterval(fetchLiveSocialStats, 60000);
     </script>
 </body>
 </html>
