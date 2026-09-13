@@ -155,11 +155,11 @@
             opacity: 0.6;
         }
 
-        /* WIDGET GRID: TikTok Counter, Clock & Copy Handle */
+        /* UTILITY GRID: Live Clock & Quick Copy */
         .utility-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 6px;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
             margin-bottom: 10px;
         }
 
@@ -167,7 +167,7 @@
             background-color: #fff;
             border: 1.5px solid var(--box-border);
             border-radius: 5px;
-            padding: 8px 6px;
+            padding: 8px 10px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -176,16 +176,15 @@
         }
 
         .utility-title {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
             opacity: 0.7;
             margin-bottom: 2px;
-            white-space: nowrap;
         }
 
         .utility-value {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 900;
             color: var(--text-color);
         }
@@ -422,18 +421,14 @@
 
             <hr class="divider">
 
-            <!-- LIVE STATS WIDGET: TikTok Counter, Clock & Quick Copy -->
+            <!-- REAL WORKING UTILITY WIDGETS -->
             <div class="utility-grid">
-                <div class="utility-card">
-                    <span class="utility-title">TikTok Followers</span>
-                    <span class="utility-value" id="tiktok-count">Loading...</span>
-                </div>
                 <div class="utility-card">
                     <span class="utility-title">Local Time ⏰</span>
                     <span class="utility-value" id="live-clock">00:00:00</span>
                 </div>
                 <div class="utility-card copy-card" onclick="copyHandle()" title="Click to copy @zmzakay">
-                    <span class="utility-title">Copy Handle 📋</span>
+                    <span class="utility-title">Quick Copy 📋</span>
                     <span class="utility-value">@zmzakay</span>
                 </div>
             </div>
@@ -549,28 +544,7 @@
             });
         }
 
-        // 3. Fetch TikTok Live Follower Counter from TokCounter API
-        async function fetchTikTokFollowers() {
-            try {
-                // If you have your own TikTok numeric ID, you can paste it directly here. 
-                // Using tokcounter public endpoint API fetch:
-                const response = await fetch('https://tiktok-api.tokcounter.com/user/stats/7497552469388624918');
-                if (!response.ok) throw new Error("API Limit");
-                const data = await response.json();
-                
-                if (data && data.followerCount) {
-                    document.getElementById('tiktok-count').textContent = Number(data.followerCount).toLocaleString();
-                } else {
-                    document.getElementById('tiktok-count').textContent = "Unavailable";
-                }
-            } catch (err) {
-                // Fallback text if network/cors blocks direct client fetch without proxy
-                document.getElementById('tiktok-count').textContent = "Live Soon";
-            }
-        }
-        fetchTikTokFollowers();
-
-        // 4. GitHub Data Fetcher
+        // 3. GitHub Data Fetcher
         async function fetchGitHubData() {
             try {
                 const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
