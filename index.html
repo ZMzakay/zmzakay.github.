@@ -204,6 +204,39 @@
             align-items: center;
         }
 
+        /* Live Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .stat-card {
+            background-color: #fff;
+            border: 1.5px solid var(--box-border);
+            border-radius: 5px;
+            padding: 8px 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat-platform {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--text-color);
+        }
+
         /* About Me Content */
         .about-text {
             font-size: 0.85rem;
@@ -345,6 +378,26 @@
                     </div>
                 </div>
                 <div class="watermark-stamp">100% GITHUB MADE</div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Live Stats Widget Section -->
+            <div style="margin-bottom: 10px;">
+                <div class="section-header" style="margin-bottom: 6px;">
+                    <span>Live Stats (@zmzakay)</span>
+                    <span>📈</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-platform">YouTube Subs</span>
+                        <span class="stat-value" id="yt-subs">Loading...</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-platform">TikTok Followers</span>
+                        <span class="stat-value" id="tt-followers">Loading...</span>
+                    </div>
+                </div>
             </div>
 
             <hr class="divider">
@@ -526,7 +579,37 @@
             }
         }
 
+        // Live stats fetcher simulation / API hooks
+        async function fetchLiveSocialStats() {
+            try {
+                // Fetching via a reliable open counter API provider widget route
+                const res = await fetch('https://api.socialcounts.org/youtube-live-subscriber-count/user/ZMzakay');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.counts && data.counts[0]) {
+                        document.getElementById('yt-subs').textContent = Number(data.counts[0].subscribers).toLocaleString();
+                    } else {
+                        document.getElementById('yt-subs').textContent = "Active";
+                    }
+                } else {
+                    document.getElementById('yt-subs').textContent = "View";
+                }
+            } catch (e) {
+                document.getElementById('yt-subs').textContent = "Check Channel";
+            }
+
+            try {
+                // TikTok stats placeholder badge hook
+                // Due to tight security on TikTok tracking APIs directly from static pages, 
+                // you can link your exact live counter view or keep it clean:
+                document.getElementById('tt-followers').textContent = "View Profile";
+            } catch (e) {
+                document.getElementById('tt-followers').textContent = "Active";
+            }
+        }
+
         fetchGitHubData();
+        fetchLiveSocialStats();
     </script>
 </body>
 </html>
