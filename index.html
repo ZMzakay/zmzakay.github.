@@ -22,7 +22,7 @@
 
         body {
             margin: 0;
-            padding: 20px 10px 50px 10px;
+            padding: 30px 10px 60px 10px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-color);
             display: flex;
@@ -41,7 +41,8 @@
             max-width: 440px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
+            position: relative;
         }
 
         /* Box / Card Styling */
@@ -50,8 +51,49 @@
             border: 2px solid var(--box-border);
             border-radius: 6px;
             padding: 14px;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: relative;
+        }
+
+        /* Creative Decorations: Tape & Pins */
+        .tape-top-left {
+            position: absolute;
+            top: -9px;
+            left: 20px;
+            width: 50px;
+            height: 16px;
+            background-color: rgba(255, 243, 215, 0.65);
+            border: 1px dashed rgba(92, 58, 33, 0.4);
+            transform: rotate(-3deg);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .tape-top-right {
+            position: absolute;
+            top: -9px;
+            right: 20px;
+            width: 50px;
+            height: 16px;
+            background-color: rgba(255, 243, 215, 0.65);
+            border: 1px dashed rgba(92, 58, 33, 0.4);
+            transform: rotate(2deg);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .push-pin {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle at 30% 30%, #ff5e5e, #991e1e);
+            border-radius: 50%;
+            border: 1px solid #5c3a21;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+            z-index: 3;
         }
 
         /* Profile Top Layout */
@@ -268,6 +310,8 @@
         
         <!-- Top Box: Profile & Socials -->
         <div class="box">
+            <div class="tape-top-left"></div>
+            <div class="tape-top-right"></div>
             <div class="profile-top">
                 <div class="profile-left-group">
                     <img src="IMG_1446.jpeg" alt="Profile" class="avatar" id="profile-avatar">
@@ -300,6 +344,7 @@
 
         <!-- About Me Box -->
         <div class="box">
+            <div class="push-pin"></div>
             <div class="section-header">
                 <span>About Me</span>
                 <span>📌</span>
@@ -316,6 +361,7 @@
 
         <!-- Latest Project Box -->
         <div class="box latest-box">
+            <div class="push-pin" style="background: radial-gradient(circle at 30% 30%, #ff9e5e, #b85d4f);"></div>
             <div class="section-header">
                 <span>Latest Project</span>
                 <span>🔥</span>
@@ -327,6 +373,7 @@
 
         <!-- All Projects Box (Fetched from GitHub) -->
         <div class="box">
+            <div class="push-pin"></div>
             <div class="section-header">
                 <span>GitHub Projects</span>
                 <span id="repo-count" style="font-size: 0.75rem;">0</span>
