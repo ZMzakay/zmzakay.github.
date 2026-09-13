@@ -7,8 +7,8 @@
     <style>
         :root {
             --cardboard-bg: url('cardboard-texture.avif');
-            --box-border: #5c3a21;
-            --box-bg: #f4e8d1;
+            --box-border: #4a2e18;
+            --box-bg: #f5ebd0;
             --text-color: #2b1d0c;
             --accent-color: #8c5830;
             --stamp-color: #b85d4f;
@@ -45,54 +45,72 @@
             position: relative;
         }
 
-        /* Box / Card Styling */
+        /* Homemade torn paper header effect */
+        .torn-banner {
+            background-color: #5c3a21;
+            color: #f5ebd0;
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: -16px;
+            z-index: 4;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Box / Card Styling with slightly uneven handmade borders */
         .box {
             background-color: var(--box-bg);
-            border: 2px solid var(--box-border);
-            border-radius: 6px;
-            padding: 14px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px dashed var(--box-border);
+            border-radius: 8px 4px 10px 6px;
+            padding: 16px 14px 14px 14px;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
             position: relative;
         }
 
         /* Creative Decorations: Tape & Pins */
         .tape-top-left {
             position: absolute;
-            top: -9px;
-            left: 20px;
-            width: 50px;
-            height: 16px;
-            background-color: rgba(255, 243, 215, 0.65);
-            border: 1px dashed rgba(92, 58, 33, 0.4);
-            transform: rotate(-3deg);
+            top: -10px;
+            left: 18px;
+            width: 55px;
+            height: 18px;
+            background-color: rgba(255, 243, 215, 0.75);
+            border-left: 1px dashed rgba(92, 58, 33, 0.3);
+            border-right: 1px dashed rgba(92, 58, 33, 0.3);
+            transform: rotate(-4deg);
             pointer-events: none;
             z-index: 2;
         }
 
         .tape-top-right {
             position: absolute;
-            top: -9px;
-            right: 20px;
-            width: 50px;
-            height: 16px;
-            background-color: rgba(255, 243, 215, 0.65);
-            border: 1px dashed rgba(92, 58, 33, 0.4);
-            transform: rotate(2deg);
+            top: -10px;
+            right: 18px;
+            width: 55px;
+            height: 18px;
+            background-color: rgba(255, 243, 215, 0.75);
+            border-left: 1px dashed rgba(92, 58, 33, 0.3);
+            border-right: 1px dashed rgba(92, 58, 33, 0.3);
+            transform: rotate(3deg);
             pointer-events: none;
             z-index: 2;
         }
 
         .push-pin {
             position: absolute;
-            top: -10px;
+            top: -11px;
             left: 50%;
             transform: translateX(-50%);
-            width: 14px;
-            height: 14px;
-            background: radial-gradient(circle at 30% 30%, #ff5e5e, #991e1e);
+            width: 15px;
+            height: 15px;
+            background: radial-gradient(circle at 30% 30%, #ff5e5e, #8a1515);
             border-radius: 50%;
-            border: 1px solid #5c3a21;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+            border: 1px solid #3b2311;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
             z-index: 3;
         }
 
@@ -168,7 +186,7 @@
             background-color: #fff;
             border: 1.5px solid var(--box-border);
             padding: 9px 12px;
-            border-radius: 5px;
+            border-radius: 6px;
             text-decoration: none;
             color: var(--text-color);
             font-weight: 600;
@@ -232,7 +250,7 @@
         .project-card {
             background-color: #fff;
             border: 1.5px solid var(--box-border);
-            border-radius: 5px;
+            border-radius: 6px;
             padding: 10px;
             margin-bottom: 8px;
             display: flex;
@@ -292,6 +310,31 @@
             border: 2px solid #b85d4f;
         }
 
+        /* Friends List Grid Style */
+        .friends-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .friend-tag {
+            background-color: #fff;
+            border: 1px solid var(--box-border);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: var(--text-color);
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .friend-tag.more {
+            background-color: #eae0cc;
+            font-style: italic;
+            font-weight: 600;
+        }
+
         /* Footer credits / copyright */
         .footer-credits {
             text-align: center;
@@ -309,6 +352,7 @@
     <div class="container">
         
         <!-- Top Box: Profile & Socials -->
+        <div class="torn-banner">Handmade Edition &bull; Est. 2026</div>
         <div class="box">
             <div class="tape-top-left"></div>
             <div class="tape-top-right"></div>
@@ -380,6 +424,23 @@
             </div>
             <div id="projects-list">
                 <p style="font-size: 0.8rem; text-align: center; margin: 5px 0; opacity: 0.7;">Loading repositories...</p>
+            </div>
+        </div>
+
+        <!-- Friends List Box -->
+        <div class="box">
+            <div class="push-pin" style="background: radial-gradient(circle at 30% 30%, #61dbfb, #1e719b);"></div>
+            <div class="section-header">
+                <span>Friends & Homies</span>
+                <span>🤝</span>
+            </div>
+            <div class="friends-grid">
+                <span class="friend-tag">Terii</span>
+                <span class="friend-tag">Victor</span>
+                <span class="friend-tag">Valentin</span>
+                <span class="friend-tag">Loan</span>
+                <span class="friend-tag">Ëngjell</span>
+                <span class="friend-tag more">et pleins d’autres</span>
             </div>
         </div>
 
