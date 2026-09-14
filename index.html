@@ -639,9 +639,12 @@
                 let latestDisplayName = latestRepo.name;
                 let latestIconUrl = "IMG_1217.gif";
                 
-                if (latestRepo.name.toLowerCase() === `${username.toLowerCase()}.github.io`) {
+                const latestRepoNameLower = latestRepo.name.toLowerCase();
+                if (latestRepoNameLower === `${username.toLowerCase()}.github.io`) {
                     latestDisplayName = "main-page";
                     latestIconUrl = "images/IMG_1467.jpeg";
+                } else if (latestRepoNameLower === "darkgpt") {
+                    latestIconUrl = "images/IMG_1487.jpeg";
                 }
 
                 latestContentEl.innerHTML = `
@@ -676,6 +679,8 @@
                     if (repoNameLower === `${username.toLowerCase()}.github.io`) {
                         displayName = "main-page";
                         currentIcon = "images/IMG_1467.jpeg";
+                    } else if (repoNameLower === "darkgpt") {
+                        currentIcon = "images/IMG_1487.jpeg";
                     } else if (repoNameLower === "jailbreak") {
                         currentIcon = "copy_59ABDB2B-C189-4B5C-8D35-733974CDDB1D.jpeg";
                     } else if (repoNameLower === "respring") {
