@@ -639,13 +639,12 @@
                 let latestDisplayName = latestRepo.name;
                 let latestIconUrl = "IMG_1217.gif";
                 
-                const latestRepoNameLower = latestRepo.name.toLowerCase();
-                if (latestRepoNameLower === `${username.toLowerCase()}.github.io`) {
+                if (latestRepo.name.toLowerCase() === `${username.toLowerCase()}.github.io`) {
                     latestDisplayName = "main-page";
                     latestIconUrl = "images/IMG_1467.jpeg";
-                } else if (latestRepoNameLower === "darkgpt") {
+                } else if (latestRepo.name.toLowerCase() === "darkgpt") {
                     latestIconUrl = "images/IMG_1487.jpeg";
-                } else if (latestRepoNameLower === "rain-of-ads") {
+                } else if (latestRepo.name === "Rain-Of-Ads") {
                     latestIconUrl = "images/IMG_1488.jpeg";
                 }
 
@@ -683,7 +682,7 @@
                         currentIcon = "images/IMG_1467.jpeg";
                     } else if (repoNameLower === "darkgpt") {
                         currentIcon = "images/IMG_1487.jpeg";
-                    } else if (repoNameLower === "rain-of-ads") {
+                    } else if (repo.name === "Rain-Of-Ads") {
                         currentIcon = "images/IMG_1488.jpeg";
                     } else if (repoNameLower === "jailbreak") {
                         currentIcon = "copy_59ABDB2B-C189-4B5C-8D35-733974CDDB1D.jpeg";
